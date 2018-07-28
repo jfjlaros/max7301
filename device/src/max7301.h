@@ -2,7 +2,6 @@
 #define MAX7301_h
 
 #include <Arduino.h>
-#include <SPI.h>
 
 #define NOP 0x00
 #define GPIO_OUTPUT 0x01
