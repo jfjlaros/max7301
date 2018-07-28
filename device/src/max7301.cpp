@@ -9,16 +9,21 @@
  * @arg {int} pinDOUT - Data Out pin.
  * @arg {int} pinCS - Chip select pin.
  */
-MAX7301::MAX7301(int pinCLK, int pinDIN, int pinDOUT, int pinCS) {
+MAX7301::MAX7301(int pinCLK, int pinDIN, int pinDOUT, int pinCS, bool x) {
   _pinCLK = pinCLK;
   _pinDIN = pinDIN;
   _pinDOUT = pinDOUT;
   _pinCS = pinCS;
 
-  pinMode(_pinCLK, OUTPUT);
-  pinMode(_pinDIN, OUTPUT);
-  pinMode(_pinDOUT, INPUT_PULLUP);
-  pinMode(_pinCS, OUTPUT);
+  ::pinMode(_pinCLK, OUTPUT);
+  ::pinMode(_pinDIN, OUTPUT);
+  ::pinMode(_pinDOUT, INPUT_PULLUP);
+  ::pinMode(_pinCS, OUTPUT);
+
+  if (!x) { // Not model AAX, disable unavailable pins.
+    write(0x09, 0x55);
+    write(0x0A, 0x55);
+  }
 }
 
 /**
@@ -33,27 +38,14 @@ byte MAX7301::_transfer(byte data) {
   int bit;
 
   for (bit = 7; bit >= 0; bit--) {
-    digitalWrite(_pinCLK, LOW);
-    digitalWrite(_pinDIN, data & (0x01 << bit));
-    result |= digitalRead(_pinDOUT) << bit;
-    digitalWrite(_pinCLK, HIGH);
+    ::digitalWrite(_pinCLK, LOW);
+    ::digitalWrite(_pinDIN, data & (0x01 << bit));
+    result |= ::digitalRead(_pinDOUT) << bit;
+    ::digitalWrite(_pinCLK, HIGH);
   }
-  digitalWrite(_pinCLK, LOW);
+  ::digitalWrite(_pinCLK, LOW);
 
   return result;
-}
-
-/**
- * Write one byte to the specified addres.
- *
- * @arg {byte} address - Address.
- * @arg {byte} data - Data.
- */
-void MAX7301::write(byte address, byte data) { 
-  digitalWrite(_pinCS, LOW);
-  _transfer(address & ~0x80);
-  _transfer(data);
-  digitalWrite(_pinCS, HIGH);
 }
 
 /**
@@ -66,15 +58,89 @@ void MAX7301::write(byte address, byte data) {
 byte MAX7301::read(byte address) {
   byte result;
 
-  digitalWrite(_pinCS, LOW);
+  ::digitalWrite(_pinCS, LOW);
   _transfer(address | 0x80);
   _transfer(NOP);
-  digitalWrite(_pinCS, HIGH);
+  ::digitalWrite(_pinCS, HIGH);
 
-  digitalWrite(_pinCS, LOW);
+  ::digitalWrite(_pinCS, LOW);
   _transfer(NOP);
   result |= _transfer(NOP);
-  digitalWrite(_pinCS, HIGH);
+  ::digitalWrite(_pinCS, HIGH);
 
   return(result);
+}
+
+/**
+ * Write one byte to the specified addres.
+ *
+ * @arg {byte} address - Address.
+ * @arg {byte} data - Data.
+ */
+void MAX7301::write(byte address, byte data) { 
+  ::digitalWrite(_pinCS, LOW);
+  _transfer(address & ~0x80);
+  _transfer(data);
+  ::digitalWrite(_pinCS, HIGH);
+}
+
+/**
+ * Set normal operation mode.
+ */
+void MAX7301::enable(void) {
+  write(0x04, 0x01);
+}
+
+/**
+ * Set shutdown mode.
+ */
+void MAX7301::disable(void) {
+  write(0x04, 0x00);
+}
+
+/**
+ * Get pin configuration.
+ *
+ * @arg {byte} pin - Pin number.
+ *
+ * @return {byte} - Pin configuration.
+ */
+byte MAX7301::getPinMode(byte pin) {
+  return (read((pin / 4) + 0x08) >> (2 * (pin % 4))) & 0x03;
+}
+
+/**
+ * Set pin configuration.
+ *
+ * @arg {byte} pin - Pin number.
+ * @arg {byte} mode - Pin configuration.
+ */
+void MAX7301::pinMode(byte pin, byte mode) {
+  write(
+    (pin / 4) + 0x08,
+    read(
+      (pin / 4) + 0x08) &
+      ~(0x03 << (2 * (pin % 4))) |
+      mode << (2 * (pin % 4)));
+}
+
+/**
+ * Read from a GPIO pin.
+ *
+ * @arg {byte} pin - Pin number.
+ *
+ * @return {byte} - Data.
+ */
+byte MAX7301::digitalRead(byte pin) {
+  return read(pin + 0x20);
+}
+
+/**
+ * Write to a GPIO pin.
+ *
+ * @arg {byte} pin - Pin number.
+ * @arg {byte} data - Data.
+ */
+void MAX7301::digitalWrite(byte pin, byte data) {
+  write(pin + 0x20, data);
 }
