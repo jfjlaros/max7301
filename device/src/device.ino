@@ -1,37 +1,19 @@
-/* MAXIM 7310 port I/O expander. */
+/* MAXIM 7301 port I/O expander. */
+#include "max7301.h"
 
-// LED pin.
-#define LED_PIN 13
-
-// LED blink durations.
-#define LED_SHORT 100
-#define LED_LONG 500
-
-
-void blink(int duration) {
-  digitalWrite(LED_PIN, HIGH);
-  delay(duration);
-  digitalWrite(LED_PIN, LOW);
-}
-
-void signal(byte data) {
-  int i;
-
-  for (i = 7; i >= 0; i--) {
-    if (data & (1 << i)) {
-      blink(LED_LONG);
-    }
-    else {
-      blink(LED_SHORT);
-    }
-    delay(LED_SHORT);
-  }
-}
+MAX7301 max7301(2, 4, 3, 5);
 
 
 void setup(void) {
-  pinMode(LED_PIN, OUTPUT);
+  max7301.write(0x04, 0x01);
+  max7301.write(0x09, 0x55);
+
+  Serial.begin(0x9600);
 }
 
 void loop(void) {
+  if (Serial.available()) {
+    Serial.println(max7301.read(0x09), HEX);
+  }
+  delay(1000);
 }
