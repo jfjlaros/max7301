@@ -4,12 +4,13 @@
 /**
  * Constructor.
  *
- * @arg {int} pinCLK - Clock pin.
- * @arg {int} pinDIN - Data In pin.
- * @arg {int} pinDOUT - Data Out pin.
- * @arg {int} pinCS - Chip select pin.
+ * @arg {byte} pinCLK - Clock pin.
+ * @arg {byte} pinDIN - Data In pin.
+ * @arg {byte} pinDOUT - Data Out pin.
+ * @arg {byte} pinCS - Chip select pin.
+ * @arg {bool} x - Select model AAX.
  */
-MAX7301::MAX7301(int pinCLK, int pinDIN, int pinDOUT, int pinCS, bool x) {
+MAX7301::MAX7301(byte pinCLK, byte pinDIN, byte pinDOUT, byte pinCS, bool x) {
   _pinCLK = pinCLK;
   _pinDIN = pinDIN;
   _pinDOUT = pinDOUT;
@@ -88,14 +89,28 @@ void MAX7301::write(byte address, byte data) {
  * Set normal operation mode.
  */
 void MAX7301::enable(void) {
-  write(0x04, 0x01);
+  write(0x04, read(0x04) | 0x01);
 }
 
 /**
  * Set shutdown mode.
  */
 void MAX7301::disable(void) {
-  write(0x04, 0x00);
+  write(0x04, read(0x04) & ~0x01);
+}
+
+/**
+ * Enable transition detection.
+ */
+void MAX7301::enableTransitionDetection(void) {
+  write(0x04, read(0x04) | 0x80);
+}
+
+/**
+ * Disable transition detection.
+ */
+void MAX7301::disableTransitionDetection(void) {
+  write(0x04, read(0x04) & ~0x80);
 }
 
 /**

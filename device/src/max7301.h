@@ -11,21 +11,23 @@
 
 class MAX7301 {
   public:
-    MAX7301(int, int, int, int, bool);
+    MAX7301(byte, byte, byte, byte, bool);
     byte read(byte),
          getPinMode(byte),
          digitalRead(byte);
     void write(byte, byte),
          enable(void),
          disable(void),
+         enableTransitionDetection(void),
+         disableTransitionDetection(void),
          pinMode(byte, byte),
          digitalWrite(byte, byte);
   private:
-    byte _transfer(byte);
-    int _pinCLK,
-        _pinDIN,
-        _pinDOUT,
-        _pinCS;
+    byte _transfer(byte),
+         _pinCLK,
+         _pinDIN,
+         _pinDOUT,
+         _pinCS;
 };
 
 #endif
