@@ -21,6 +21,9 @@ MAX7301::MAX7301(byte pinCLK, byte pinDIN, byte pinDOUT, byte pinCS, bool x) {
   ::pinMode(_pinDOUT, INPUT_PULLUP);
   ::pinMode(_pinCS, OUTPUT);
 
+  ::digitalWrite(_pinCLK, LOW);
+  ::digitalWrite(_pinCS, HIGH);
+
   if (!x) { // Not model AAX, disable unavailable pins.
     write(0x09, 0x55);
     write(0x0A, 0x55);
@@ -131,12 +134,10 @@ byte MAX7301::getPinMode(byte pin) {
  * @arg {byte} mode - Pin configuration.
  */
 void MAX7301::pinMode(byte pin, byte mode) {
-  write(
-    (pin / 4) + 0x08,
-    read(
-      (pin / 4) + 0x08) &
-      ~(0x03 << (2 * (pin % 4))) |
-      mode << (2 * (pin % 4)));
+  byte reg = (pin / 4) + 0x08,
+       offset = 2 * (pin % 4);
+
+  write(reg, read(reg) & ~(0x03 << offset) | mode << offset);
 }
 
 /**
@@ -158,4 +159,25 @@ byte MAX7301::digitalRead(byte pin) {
  */
 void MAX7301::digitalWrite(byte pin, byte data) {
   write(pin + 0x20, data);
+}
+
+/**
+ * Read up to 8 consecutive GPIO pins.
+ *
+ * @arg {byte} pin - First pin number.
+ *
+ * @return {byte} - Data.
+ */
+byte MAX7301::digitalReadRange(byte pin) {
+  return read(pin + 0x40);
+}
+
+/**
+ * Write to up to 8 consecutive GPIO pins.
+ *
+ * @arg {byte} pin - First pin number.
+ * @arg {byte} data - Data.
+ */
+void MAX7301::digitalWriteRange(byte pin, byte data) {
+  write(pin + 0x40, data);
 }
