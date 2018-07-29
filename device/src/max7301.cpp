@@ -24,7 +24,8 @@ MAX7301::MAX7301(byte pinCLK, byte pinDIN, byte pinDOUT, byte pinCS, bool x) {
   ::digitalWrite(_pinCLK, LOW);
   ::digitalWrite(_pinCS, HIGH);
 
-  if (!x) { // Not model AAX, disable unavailable pins.
+  if (!x) {
+    // Not model AAX, disable unavailable pins.
     write(0x09, 0x55);
     write(0x0A, 0x55);
   }
@@ -114,6 +115,18 @@ void MAX7301::enableTransitionDetection(void) {
  */
 void MAX7301::disableTransitionDetection(void) {
   write(0x04, read(0x04) & ~0x80);
+}
+
+/**
+ * Configure transition detection mask.
+ *
+ * @arg {byte} pin - Pin number.
+ * @arg {bool} mode - Mode.
+ */
+void MAX7301::configureTransitionDetection(byte pin, bool mode) {
+  byte offset = pin - 24;
+
+  write(0x06, read(0x06) & ~(0x01 << offset) | mode << offset);
 }
 
 /**

@@ -14,14 +14,17 @@ class MAX7301 {
     MAX7301(byte, byte, byte, byte, bool);
     byte read(byte),
          getPinMode(byte),
-         digitalRead(byte);
+         digitalRead(byte),
+         digitalReadRange(byte);
     void write(byte, byte),
          enable(void),
          disable(void),
          enableTransitionDetection(void),
          disableTransitionDetection(void),
+         configureTransitionDetection(byte, bool),
          pinMode(byte, byte),
-         digitalWrite(byte, byte);
+         digitalWrite(byte, byte),
+         digitalWriteRange(byte, byte);
   private:
     byte _transfer(byte),
          _pinCLK,
