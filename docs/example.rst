@@ -1,4 +1,6 @@
 Example sketch
 ==============
 
-.. TODO:: Finish example and document.
+.. warning:: Under construction.
+
+.. image:: setup.svg
