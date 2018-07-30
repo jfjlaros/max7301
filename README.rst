@@ -20,9 +20,11 @@ MAXIM 7310 port I/O expander
 
 ----
 
-PLACEHOLDER
+This library provides an interface for the arduino_ to the MAX7301 GPIO port
+expander.
 
 Please see ReadTheDocs_ for the latest documentation.
 
 
+.. _arduino: https://www.arduino.cc
 .. _ReadTheDocs: https://max7301.readthedocs.io/en/latest/index.html

@@ -4,8 +4,9 @@ Usage
 Set up
 ------
 
-Make a global class instance, i.e., put it outside of any function at the top
-of the sketch. The constructor of this class takes five variables:
+Include the header file and make a global class instance, i.e., put it outside
+of any function at the top of the sketch. The constructor of this class takes
+five variables:
 
 +------------+-------------------+----------------+
 | position   | description       | abbreviation   |
@@ -38,6 +39,8 @@ respectively and our chip is of type MAX7301ANI, initialise the class instance
 as follows:
 
 .. code:: cpp
+
+    #include <max7301.h>
 
     MAX7301 max7301(2, 3, 4, 5, false);
 

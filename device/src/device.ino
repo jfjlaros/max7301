@@ -1,5 +1,5 @@
 /* MAXIM 7301 port I/O expander. */
-#include "max7301.h"
+#include <max7301.h>
 
 #define CMD_ENABLE 0x00
 #define CMD_DISABLE 0x01

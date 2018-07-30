@@ -8,5 +8,5 @@
 
    introduction
    installation
-   library
-   credits
+   usage
+   example
