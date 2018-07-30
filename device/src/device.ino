@@ -12,7 +12,7 @@
 #define CMD_READ 0x08
 #define CMD_WRITE 0x09
 
-MAX7301 max7301(2, 3, 4, 5, false);
+MAX7301 max7301(4, 5, 6, 7, false);
 
 
 void setup(void) {

@@ -3,4 +3,8 @@ Example sketch
 
 .. warning:: Under construction.
 
-.. image:: setup.svg
+.. figure:: schema.svg
+   :alt: Schema
+
+   Schema for the test setup
+

@@ -34,7 +34,7 @@ The chip type should be ``true`` for the MAX7301AAX, ``false`` otherwise.
 | MAX7301AAI   | 28     | ``false``   |
 +--------------+--------+-------------+
 
-If we have the clock, data in, data out and chip select on pins 2, 3, 4 and 5
+If we have the clock, data in, data out and chip select on pins 4, 5, 6 and 7
 respectively and our chip is of type MAX7301ANI, initialise the class instance
 as follows:
 
@@ -42,7 +42,7 @@ as follows:
 
     #include <max7301.h>
 
-    MAX7301 max7301(2, 3, 4, 5, false);
+    MAX7301 max7301(4, 5, 6, 7, false);
 
 After initialisation, the MAX7301 is in shutdown mode. Use the ``enable()``
 function to make it enter normal operation mode. This is typically done in the

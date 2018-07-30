@@ -7,7 +7,7 @@ Download
 Latest release
 ~~~~~~~~~~~~~~
 
-.. TODO:: Add this after release.
+.. warning:: Not available until first release.
 
 
 From source
