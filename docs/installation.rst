@@ -1,13 +1,19 @@
 Installation
 ============
 
+In this section we cover retrieval of the latest release or development version
+of the code and subsequent installation.
+
 Download
 --------
 
 Latest release
 ~~~~~~~~~~~~~~
 
-.. warning:: Not available until first release.
+Navigate to the `latest release`_ and either download the `.zip` or the
+`.tar.gz` file.
+
+Unpack the downloaded archive.
 
 
 From source
@@ -61,5 +67,6 @@ subdirectory.
     git clone https://github.com/jfjlaros/max7301.git
 
 
+.. _latest release: https://github.com/jfjlaros/max7301/releases/latest
 .. _Ino: https://github.com/amperka/ino
 .. _GitHub: https://github.com/jfjlaros/max7301

@@ -1,8 +1,6 @@
 Example sketch
 ==============
 
-.. warning:: Under construction.
-
 In this sketch_, we demonstrate the different capabilities of the MAX7301. We
 connect two buttons and one LED.
 
