@@ -10,3 +10,4 @@
    installation
    usage
    example
+   credits

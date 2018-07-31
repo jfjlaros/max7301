@@ -73,7 +73,7 @@ byte MAX7301::read(byte address) {
   result |= _transfer(NOP);
   ::digitalWrite(_pinCS, HIGH);
 
-  return(result);
+  return result;
 }
 
 /**

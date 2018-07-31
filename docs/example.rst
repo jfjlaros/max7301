@@ -19,12 +19,24 @@ pressed and button 2 will send a short pulse to the LED.
    instructions.
 
 After compiling and uploading the sketch, connect the Arduino to a USB port and
-run the host side script.
+run the host side script_.
 
 ::
 
     python host.py
 
+This script checks the state of button 1 every second. If it is pressed at the
+moment of checking, a short pulse will be send to the LED. This means that if
+the button is pressed and released between two consecutive checks, nothing is
+registered. Furthermore, if the button is pressed for a longer period, multiple
+pulses will be send to the LED.
+
+For button 2, the script checks whether a transition has occurred, this
+transition will be registered even if the button is pressed and released
+between two consecutive checks. Also, the release of the button is registered
+as a transition, so the LED will flash upon release of the button as well.
+
 
 .. _sketch: https://github.com/jfjlaros/max7301/blob/master/device/src/device.ino
 .. _datasheet: https://datasheets.maximintegrated.com/en/ds/MAX7301.pdf
+.. _script: https://github.com/jfjlaros/max7301/blob/master/host/host.py

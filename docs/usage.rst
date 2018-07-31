@@ -1,8 +1,10 @@
 Usage
 =====
 
-Set up
-------
+In this section we describe how to configure and use the API library.
+
+Configuration
+-------------
 
 Include the header file and make a global class instance, i.e., put it outside
 of any function at the top of the sketch. The constructor of this class takes
@@ -34,9 +36,9 @@ The chip type should be ``true`` for the MAX7301AAX, ``false`` otherwise.
 | MAX7301AAI   | 28     | ``false``   |
 +--------------+--------+-------------+
 
-If we have the clock, data in, data out and chip select on pins 4, 5, 6 and 7
-respectively and our chip is of type MAX7301ANI, initialise the class instance
-as follows:
+If, for example, we have the clock, data in, data out and chip select on pins
+4, 5, 6 and 7 respectively and our chip is of type MAX7301ANI, initialise the
+class instance as follows:
 
 .. code:: cpp
 

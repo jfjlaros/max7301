@@ -1,5 +1,5 @@
-MAXIM 7310 port I/O expander
-============================
+MAXIM 7310 GPIO port expander
+=============================
 
 .. image:: https://img.shields.io/github/last-commit/jfjlaros/max7301.svg
    :target: https://github.com/jfjlaros/max7301/graphs/commit-activity
@@ -20,11 +20,11 @@ MAXIM 7310 port I/O expander
 
 ----
 
-This library provides an interface for the arduino_ to the MAX7301 GPIO port
+This library provides an interface for the Arduino_ to the MAX7301 GPIO port
 expander.
 
 Please see ReadTheDocs_ for the latest documentation.
 
 
-.. _arduino: https://www.arduino.cc
+.. _Arduino: https://www.arduino.cc
 .. _ReadTheDocs: https://max7301.readthedocs.io/en/latest/index.html
