@@ -19,7 +19,7 @@ example host script_ is included for controlling the MAX7301.
 
 
 .. _datasheet: https://datasheets.maximintegrated.com/en/ds/MAX7301.pdf
-.. _API interface: usage
-.. _example: example
+.. _API interface: usage.html
+.. _example: example.html
 .. _sketch: https://github.com/jfjlaros/max7301/blob/master/device/src/device.ino
 .. _script: https://github.com/jfjlaros/max7301/blob/master/host/host.py
