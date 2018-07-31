@@ -146,6 +146,9 @@ transition detection.
 
     max7301.enableTransitionDetection();
 
+Transition detection can be disabled with the ``disableTransitionDetection()``
+function.
+
 
 Low level functions
 -------------------
