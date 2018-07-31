@@ -14,7 +14,7 @@
 #define CMD_DIG_WRITE_RANGE 0x0a
 #define CMD_READ 0x0b
 #define CMD_WRITE 0x0c
-#define CMD_INT 0x0d
+#define CMD_CHECK_INT 0x0d
 
 MAX7301 max7301(4, 5, 6, 7, false);
 volatile bool button_change = false;
@@ -78,7 +78,7 @@ void loop(void) {
       case CMD_WRITE:
         max7301.write((byte)cmd[1], (byte)cmd[2]);
         break;
-      case CMD_INT:
+      case CMD_CHECK_INT:
         Serial.write((byte)button_change);
         break;
     }
