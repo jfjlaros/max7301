@@ -1,4 +1,3 @@
-/* MAXIM 7301 port I/O expander. */
 #include <max7301.h>
 
 #define CMD_ENABLE 0x00
@@ -27,7 +26,7 @@ void button_interrupt(void) {
 
 void setup(void) {
   pinMode(2, INPUT_PULLUP);
-  attachInterrupt(2, button_interrupt, FALLING);
+  attachInterrupt(1, button_interrupt, RISING);
 
   Serial.begin(9600);
 }
@@ -54,6 +53,7 @@ void loop(void) {
       case CMD_ENABLE_TD:
         max7301.enableTransitionDetection();
         button_change = false;
+        break;
       case CMD_DISABLE_TD:
         max7301.disableTransitionDetection();
         break;

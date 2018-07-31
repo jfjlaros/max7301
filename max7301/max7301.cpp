@@ -1,3 +1,4 @@
+/* MAXIM 7301 GPIO port expander. */
 #include "max7301.h"
 
 
