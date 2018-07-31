@@ -1,4 +1,4 @@
-Copyright (c) 2015 by Jeroen F.J. Laros.
+Copyright (c) 2018 by Jeroen F.J. Laros.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
