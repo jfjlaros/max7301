@@ -42,15 +42,17 @@ class MAX7301(object):
             return struct.unpack('B', self._connection.read(1))[0]
         return None
 
-    def pulse(self, pin, duration):
+    def pulse(self, pin, up, down):
         """Send a short pulse to a pin.
 
         :arg int pin: Pin number.
-        :arg float duration: Duration of the pulse.
+        :arg float up: Pin high duration.
+        :arg float down: Pin low duration.
         """
         self.cmd('dig_write', pin, HIGH)
-        time.sleep(duration)
+        time.sleep(up)
         self.cmd('dig_write', pin, LOW)
+        time.sleep(down)
 
     def dump(self):
         """Dump all registers of the MAX7301 to standard output."""
@@ -76,10 +78,11 @@ def main():
 
     while True:
         if not max7301.cmd('dig_read', 12):
-            max7301.pulse(22, 0.2)
+            max7301.pulse(22, 0.01, 0.05)
 
         if max7301.cmd('check_int'):
-            max7301.pulse(22, 0.2)
+            for _ in range(3):
+                max7301.pulse(22, 0.01, 0.05)
             max7301.cmd('enable_td')
 
         time.sleep(1.0)

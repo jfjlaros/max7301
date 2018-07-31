@@ -6,9 +6,7 @@ connect two buttons and one LED.
 
 - Button 1 is connected to a normal input pin (12).
 - Button 2 is connected to an input pin with transition detection (24).
-
-Both buttons drive an LED on pin 22, button 1 will simply turn the LED on when
-pressed and button 2 will send a short pulse to the LED.
+- The LED is connected to pin 22.
 
 .. figure:: schema.svg
    :alt: Schema
@@ -24,15 +22,16 @@ run the host side script_.
     python host.py
 
 This script checks the state of button 1 every second. If it is pressed at the
-moment of checking, a short pulse will be send to the LED. This means that if
-the button is pressed and released between two consecutive checks, nothing is
+moment of checking, a short pulse will be send to the LED. Note that if the
+button was pressed and released between two consecutive checks, nothing is
 registered. Furthermore, if the button is pressed for a longer period, multiple
 pulses will be send to the LED.
 
-For button 2, the script checks whether a transition has occurred, this
-transition will be registered even if the button is pressed and released
-between two consecutive checks. Also, the release of the button is registered
-as a transition, so the LED will flash upon release of the button as well.
+For button 2, the script checks whether a transition has occurred and sends
+three short pulses to the LED if this has happened. This transition will be
+registered even if the button is pressed and released between two consecutive
+checks. Also, the release of the button is registered as a transition, so the
+LED will flash upon release of this button as well.
 
 
 .. _sketch: https://github.com/jfjlaros/max7301/blob/master/device/src/device.ino
