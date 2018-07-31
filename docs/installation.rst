@@ -10,8 +10,8 @@ Download
 Latest release
 ~~~~~~~~~~~~~~
 
-Navigate to the `latest release`_ and either download the `.zip` or the
-`.tar.gz` file.
+Navigate to the `latest release`_ and either download the ``.zip`` or the
+``.tar.gz`` file.
 
 Unpack the downloaded archive.
 
@@ -68,5 +68,5 @@ subdirectory.
 
 
 .. _latest release: https://github.com/jfjlaros/max7301/releases/latest
-.. _Ino: https://github.com/amperka/ino
+.. _Ino: http://inotool.org
 .. _GitHub: https://github.com/jfjlaros/max7301

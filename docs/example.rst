@@ -27,11 +27,11 @@ button was pressed and released between two consecutive checks, nothing is
 registered. Furthermore, if the button is pressed for a longer period, multiple
 pulses will be send to the LED.
 
-For button 2, the script checks whether a transition has occurred and sends
-three short pulses to the LED if this has happened. This transition will be
-registered even if the button is pressed and released between two consecutive
-checks. Also, the release of the button is registered as a transition, so the
-LED will flash upon release of this button as well.
+For button 2, the script checks whether a transition has occurred every second
+and sends three short pulses to the LED if this has happened. This transition
+will be registered even if the button is pressed and released between two
+consecutive checks. Also, the release of the button is registered as a
+transition, so the LED will flash upon release of this button as well.
 
 
 .. _sketch: https://github.com/jfjlaros/max7301/blob/master/device/src/device.ino
