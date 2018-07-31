@@ -11,11 +11,21 @@
 #define CMD_DIG_WRITE 0x07
 #define CMD_READ 0x08
 #define CMD_WRITE 0x09
+#define CMD_INT 0x0A
 
 MAX7301 max7301(4, 5, 6, 7, false);
+volatile bool button_change = false;
+
+
+void button_interrupt(void) {
+  button_change = true;
+}
 
 
 void setup(void) {
+  pinMode(2, INPUT_PULLUP);
+  attachInterrupt(2, button_interrupt, FALLING);
+
   Serial.begin(9600);
 }
 
@@ -24,6 +34,7 @@ void loop(void) {
 
   if (Serial.available()) {
     Serial.readBytes(cmd, 3);
+
     switch (cmd[0]) {
       case CMD_ENABLE:
         max7301.enable();
@@ -54,6 +65,10 @@ void loop(void) {
         break;
       case CMD_WRITE:
         max7301.write((byte)cmd[1], (byte)cmd[2]);
+        break;
+      case CMD_INT:
+        Serial.write((byte)button_change);
+        button_press = false;
         break;
     }
   }
