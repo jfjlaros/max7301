@@ -53,6 +53,7 @@ void loop(void) {
         break;
       case CMD_ENABLE_TD:
         max7301.enableTransitionDetection();
+        button_change = false;
         break;
       case CMD_DIG_READ:
         Serial.write(max7301.digitalRead((byte)cmd[1]));
@@ -68,7 +69,6 @@ void loop(void) {
         break;
       case CMD_INT:
         Serial.write((byte)button_change);
-        button_press = false;
         break;
     }
   }

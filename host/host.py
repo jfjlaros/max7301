@@ -63,14 +63,14 @@ def main():
     max7301.cmd('conf_td', 24, True)
     max7301.cmd('enable_td')
 
+    max7301.digital_write(22, MAX7301.LOW)
+
     while True:
         if not max7301.digital_read(12):
-            max7301.digital_write(22, MAX7301.LOW)
-        else:
-            max7301.digital_write(22, MAX7301.LOW)
+            max7301.pulse(22, 0.2)
 
         if max7301.check_interrupt:
-            pulse(22, 0.5)
+            max7301.pulse(22, 0.2)
             max7301.cmd('enable_td')
 
         time.sleep(1.0)
