@@ -1,4 +1,4 @@
-MAXIM 7310 GPIO port expander
+MAXIM 7301 GPIO port expander
 =============================
 
 .. image:: https://img.shields.io/github/last-commit/jfjlaros/max7301.svg
